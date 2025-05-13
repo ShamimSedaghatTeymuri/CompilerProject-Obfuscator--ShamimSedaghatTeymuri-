@@ -1,4 +1,4 @@
-// Generated from MiniC.g4 by ANTLR 4.9.2
+// Generated from src/parser/MiniC.g4 by ANTLR 4.9.2
 package parser;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;

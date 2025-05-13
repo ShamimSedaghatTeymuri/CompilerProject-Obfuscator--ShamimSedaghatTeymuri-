@@ -131,3 +131,7 @@ functionCall
 args
     : expr (COMMA expr)*
     ;
+
+ varDecl
+     : type ID (ASSIGN expr)? SEMI
+     ;
