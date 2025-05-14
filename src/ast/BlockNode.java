@@ -3,9 +3,9 @@ package ast;
 import java.util.List;
 
 public class BlockNode implements ASTNode {
-    public final List<ASTNode> statement;
+    public final List<StmtNode> statement;
 
-    public BlockNode(List<ASTNode> statement) {
+    public BlockNode(List<StmtNode> statement) {
         this.statement = statement;
     }
 

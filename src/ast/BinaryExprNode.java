@@ -2,11 +2,11 @@ package ast;
 
 public class BinaryExprNode extends ExprNode {
     public final ExprNode left;
-    public final ExprNode op;
+    public final String op;
     public final ExprNode right;
 
 
-    public BinaryExprNode(ExprNode left, ExprNode op, ExprNode right) {
+    public BinaryExprNode(ExprNode left, String op, ExprNode right) {
         this.left = left;
         this.right = right;
         this.op = op;
