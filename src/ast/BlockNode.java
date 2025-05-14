@@ -3,10 +3,10 @@ package ast;
 import java.util.List;
 
 public class BlockNode implements ASTNode {
-    public final List<StmtNode> statement;
+    public final List<StmtNode> statements;
 
-    public BlockNode(List<StmtNode> statement) {
-        this.statement = statement;
+    public BlockNode(List<StmtNode> statements) {
+        this.statements = statements;
     }
 
     @Override
