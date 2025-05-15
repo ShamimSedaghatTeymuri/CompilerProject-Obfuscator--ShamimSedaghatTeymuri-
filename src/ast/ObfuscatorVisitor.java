@@ -2,6 +2,7 @@ package ast;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class ObfuscatorVisitor implements ASTVisitor<String> {
     private final Map<String, String> nameMap = new HashMap<>();
@@ -17,6 +18,18 @@ public class ObfuscatorVisitor implements ASTVisitor<String> {
         String obfuscatedName = isFunction ? "f" + funcCount++ : "v" + varCount++;
         nameMap.put(original, obfuscatedName);
         return obfuscatedName;
+    }
+
+    private String generateDeadCode() {
+        Random r = new Random();
+        int choice = r.nextInt(4);
+        return switch (choice) {
+            case 0 -> "int x" + r.nextInt(1000) + " = " + r.nextInt(100) + ";";
+            case 1 -> "if (0) {\n\tint f" + r.nextInt(1000) + " = " + r.nextInt(100) + ";\n}";
+            case 2 -> "if (1 > 2){\n\tint y" + r.nextInt(1000) + " = " + r.nextInt(10) + ";\n}";
+            case 3 -> "for (int i = 0; i < 0; i++) {\n\tint loop = i * 42;\n}";
+            default -> "//dead code";
+        };
     }
 
     private String withIndent(String code) {
@@ -60,8 +73,12 @@ public class ObfuscatorVisitor implements ASTVisitor<String> {
         StringBuilder sb = new StringBuilder();
         sb.append("{\n");
         indent += INDENT_STEP;
+        sb.append(withIndent(generateDeadCode())).append("\n");
         for (StmtNode stmt : node.statements) {
             sb.append(withIndent(stmt.accept(this))).append("\n");
+            if (Math.random() < 0.8) {
+                sb.append(withIndent(generateDeadCode())).append("\n");
+            }
         }
         indent = indent.substring(0, indent.length() - INDENT_STEP.length());
         sb.append("}");
