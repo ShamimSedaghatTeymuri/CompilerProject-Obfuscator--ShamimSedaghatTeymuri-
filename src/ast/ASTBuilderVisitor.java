@@ -1,5 +1,6 @@
 package ast;
 
+import org.antlr.v4.runtime.tree.ParseTree;
 import parser.MiniCBaseVisitor;
 import parser.MiniCParser;
 
@@ -11,12 +12,15 @@ public class ASTBuilderVisitor extends MiniCBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitProgram(MiniCParser.ProgramContext ctx) {
         List<ASTNode> declarations = new ArrayList<>();
-        for (var child : ctx.children) {
+        for (ParseTree child : ctx.children) {
             ASTNode node = visit(child);
-            if (node != null) declarations.add(node);
+            if (node != null) {
+                declarations.add(node);
+            }
         }
         return new ProgramNode(declarations);
     }
+
 
     @Override
     public ASTNode visitFunctionDecl(MiniCParser.FunctionDeclContext ctx) {

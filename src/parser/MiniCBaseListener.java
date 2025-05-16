@@ -1,6 +1,5 @@
-// Generated from src/parser/MiniC.g4 by ANTLR 4.9.2
+// Generated from MiniC.g4 by ANTLR 4.9.2
 package parser;
-
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;

@@ -1,4 +1,5 @@
 int sum(int a, int b) {
+    int temp = b * 8;
     int result = a + b;
     return result;
 }
