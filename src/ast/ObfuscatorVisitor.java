@@ -109,8 +109,13 @@ public class ObfuscatorVisitor implements ASTVisitor<String> {
 
     @Override
     public String visit(IfNode node) {
+        String condition = node.condition.accept(this);
+
+        if (node.condition instanceof VarExprNode || node.condition instanceof FunctionCallNode) {
+            condition = "!!" + condition;
+        }
         StringBuilder sb = new StringBuilder();
-        sb.append("if (").append(node.condition.accept(this)).append(") ").append(node.thenStmt.accept(this));
+        sb.append("if (").append(condition).append(") ").append(node.thenStmt.accept(this));
         if (node.elseStmt != null) {
             sb.append(" else ").append(node.elseStmt.accept(this));
         }
@@ -151,12 +156,52 @@ public class ObfuscatorVisitor implements ASTVisitor<String> {
 
     @Override
     public String visit(AssignmentNode node) {
-        return getObfuscatedName(node.variable, false) + " = " + node.value.accept(this);
+        String variable = getObfuscatedName(node.variable, false);
+        String value = node.value.accept(this);
+
+        if (node.value instanceof VarExprNode || node.value instanceof LiteralExprNode) {
+            return variable + " = (0 + " + value + ");";
+        }
+
+        return variable + " = " + value + ";";
     }
 
     @Override
     public String visit(BinaryExprNode node) {
-        return "(" + node.left.accept(this) + " " + node.op + " " + node.right.accept(this) + ")";
+        String left = node.left.accept(this);
+        String right = node.right.accept(this);
+        String op = node.op;
+
+        if (op.equals("+") && node.right instanceof LiteralExprNode) {
+            try {
+                int value = Integer.parseInt(((LiteralExprNode) node.right).value);
+                return "(" + left + " - (" + (-value) + "))";
+            } catch (NumberFormatException ignored) {
+            }
+        }
+
+        if (op.equals("*") && node.right instanceof LiteralExprNode) {
+            try {
+                int value = Integer.parseInt(((LiteralExprNode) node.right).value);
+                if ((value & (value - 1)) == 0) {
+                    int shiftCount = Integer.numberOfTrailingZeros(value);
+                    return "(" + left + " << " + shiftCount + ")";
+                }
+            } catch (NumberFormatException ignored) {
+            }
+        }
+
+        if (op.equals("/") && node.right instanceof LiteralExprNode) {
+            try {
+                int value = Integer.parseInt(((LiteralExprNode) node.right).value);
+                if ((value & (value - 1)) == 0) {
+                    int shiftCount = Integer.numberOfTrailingZeros(value);
+                    return "(" + left + " >> " + shiftCount + ")";
+                }
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        return "(" + left + " " + node.op + " " + right + ")";
     }
 
     @Override
