@@ -1,4 +1,4 @@
-int sum(int a, int b) {
+int func(int a, int b) {
     int temp = b * 8;
     int result = a + b;
     return result;
@@ -7,7 +7,7 @@ int sum(int a, int b) {
 int main() {
     int x = 3;
     int y = 4;
-    int total = sum(x, y);
+    int total = func(x, y);
     printf("%d\n", total);
     return 0;
 }
