@@ -2,7 +2,7 @@ package ast;
 
 import java.util.List;
 
-public class BlockNode implements ASTNode {
+public class BlockNode implements StmtNode {
     public final List<StmtNode> statements;
 
     public BlockNode(List<StmtNode> statements) {
