@@ -1,27 +1,27 @@
 int f0(int v0) {
-    if (0) {
-		int z0 = 89;
+    for (int i = 0; i < 0; i++) {
+		int loop = i * 42;
 	}
     return (v0 * v0);
-    int x0 = 60;
+    int x0 = 36;
 }
 int f1() {
-    if (0) {
-		int z1 = 63;
-	}
+    int x1 = 1;
     int v1 = 6;
-    int x1 = 28;
+    if (0) {
+		int z0 = 86;
+	}
     int v2 = f0(v1);
     if (1 > 2){
-		int y0 = 3;
+		int y0 = 2;
 	}
     printf("%d\n", v2);
-    if (0) {
-		int z2 = 68;
+    if (1 > 2){
+		int y1 = 1;
 	}
     return 0;
-    if (1 > 2){
-		int y1 = 2;
+    if (0) {
+		int z1 = 78;
 	}
 }
 

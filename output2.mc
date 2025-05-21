@@ -1,38 +1,41 @@
 int f0(int v0, int v1) {
-    if (1 > 2){
-		int y0 = 5;
+    for (int i = 0; i < 0; i++) {
+		int loop = i * 42;
 	}
     if ((v0 > v1)) {
-        int x0 = 26;
-        return v0;
-        int x1 = 99;
-} else {
-        int x2 = 32;
-        return v1;
         if (0) {
-		int z0 = 52;
+		int z0 = 12;
+	}
+        return v0;
+        if (1 > 2){
+		int y0 = 7;
+	}
+} else {
+        if (1 > 2){
+		int y1 = 8;
+	}
+        return v1;
+        for (int i = 0; i < 0; i++) {
+		int loop = i * 42;
 	}
 }
-    int x3 = 76;
+    if (0) {
+		int z1 = 52;
+	}
 }
 int f1() {
-    if (1 > 2){
-		int y1 = 0;
+    if (0) {
+		int z2 = 69;
 	}
     int v2 = 5;
-    for (int i = 0; i < 0; i++) {
-		int loop = i * 42;
-	}
     int v3 = 9;
-    for (int i = 0; i < 0; i++) {
-		int loop = i * 42;
-	}
+    int x0 = 56;
     int v4 = f0(v2, v3);
-    if (0) {
-		int z1 = 32;
-	}
+    int x1 = 97;
     printf("%d\n", v4);
     return 0;
-    int x4 = 98;
+    if (1 > 2){
+		int y2 = 6;
+	}
 }
 

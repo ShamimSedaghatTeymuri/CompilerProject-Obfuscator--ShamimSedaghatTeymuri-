@@ -1,38 +1,34 @@
 int f0(int v0, int v1) {
-    if (1 > 2){
-		int y0 = 5;
-	}
+    int x0 = 99;
     int v2 = (v1 << 3);
+    if (0) {
+		int z0 = 70;
+	}
     int v3 = (v0 + v1);
-    if (1 > 2){
-		int y1 = 6;
+    if (0) {
+		int z1 = 25;
 	}
     return v3;
-    if (1 > 2){
-		int y2 = 7;
-	}
+    int x1 = 76;
 }
 int f1() {
     if (1 > 2){
-		int y3 = 0;
+		int y0 = 5;
 	}
     int v4 = 3;
-    if (1 > 2){
-		int y4 = 1;
-	}
     int v5 = 4;
-    for (int i = 0; i < 0; i++) {
-		int loop = i * 42;
+    if (1 > 2){
+		int y1 = 2;
 	}
     int v6 = f0(v4, v5);
-    for (int i = 0; i < 0; i++) {
-		int loop = i * 42;
+    if (1 > 2){
+		int y2 = 0;
 	}
     printf("%d\n", v6);
-    int x0 = 53;
+    int x2 = 95;
     return 0;
     if (1 > 2){
-		int y5 = 6;
+		int y3 = 1;
 	}
 }
 
