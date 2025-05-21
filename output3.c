@@ -1,3 +1,4 @@
+#include <stdio.h>
 int f0(int v0) {
     if (1 > 2){
 		int y0 = 1;

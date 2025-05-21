@@ -18,6 +18,9 @@ public class ObfuscatorVisitor implements ASTVisitor<String> {
         if (nameMap.containsKey(original)) {
             return nameMap.get(original);
         }
+        if (isFunction && original.equals("main")) {
+            return "main";
+        }
         String obfuscatedName = isFunction ? "f" + funcCount++ : "v" + varCount++;
         nameMap.put(original, obfuscatedName);
         return obfuscatedName;
@@ -132,8 +135,8 @@ public class ObfuscatorVisitor implements ASTVisitor<String> {
 
     @Override
     public String visit(ForNode node) {
-        String init = node.init.accept(this);
-        String cond = node.condition.accept(this);
+        String init = node.init.expr != null ? node.init.expr.accept(this) : "";
+        String cond = node.condition.expr != null ? node.condition.expr.accept(this) : "";
         String update = node.update != null ? node.update.accept(this) : "";
         return "for (" + init + "; " + cond + "; " + update + ") " + node.body.accept(this);
     }
@@ -163,10 +166,10 @@ public class ObfuscatorVisitor implements ASTVisitor<String> {
         String value = node.value.accept(this);
 
         if (node.value instanceof VarExprNode || node.value instanceof LiteralExprNode) {
-            return variable + " = (0 + " + value + ");";
+            return variable + " = (0 + " + value + ")";
         }
 
-        return variable + " = " + value + ";";
+        return variable + " = " + value;
     }
 
     @Override

@@ -1,3 +1,4 @@
+#include <stdio.h>
 int f0(int v0, int v1) {
     if (0) {
 		int z0 = 84;

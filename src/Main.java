@@ -14,11 +14,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Main {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
     public static void main(String[] args) {
         for (int i = 1; i <= 5; i++) {
             try {
                 String inputFile = "input" + i + ".mc";
                 String outputFile = "output" + i + ".mc";
+                String inputC = "input" + i + ".c";
+                String outputC = "output" + i + ".c";
                 String code = new String(Files.readAllBytes(Paths.get(inputFile)));
                 //parse tree
                 CharStream input = CharStreams.fromString(code);
@@ -40,7 +44,18 @@ public class Main {
                 try (PrintWriter out = new PrintWriter(outputFile)) {
                     out.println(obfuscated);
                 }
-                System.out.println("obfuscation complete for " + inputFile);
+                System.out.println(ANSI_GREEN + "obfuscation complete for " + inputFile + ANSI_RESET);
+
+
+                String code1 = Files.readString(Paths.get(inputFile));
+                code1 = "#include <stdio.h>\n" + code1;
+                Files.writeString(Paths.get(inputC), code1);
+
+                String code2 = Files.readString(Paths.get(outputFile));
+                code2 = "#include <stdio.h>\n" + code2;
+                Files.writeString(Paths.get(outputC), code2);
+
+                PerformanceComparator.compare(inputC, outputC);
             } catch (IOException e) {
                 System.out.println("Error reading input" + i + ".mc" + e.getMessage());
             } catch (Exception e) {
